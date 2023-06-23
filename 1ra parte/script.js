@@ -26,28 +26,28 @@ const agregarAlCarrito = (e) => {
 
 // Froma con innerHTMl 
 
-let template = "";
+// let template = "";
 
-const pintarCarrito = (producto) => {
-  console.log("pintar carrito", producto);
+// const pintarCarrito = (producto) => {
+//   console.log("pintar carrito", producto);
 
-  template = "";
+//   template = "";
 
-  Object.values(carritoObjeto).forEach((item) => {
-//    template = ""; // para que el carrito parta vacio y no se me repita informacion con el forEach
+//   Object.values(carritoObjeto).forEach((item) => {
+// //    template = ""; // para que el carrito parta vacio y no se me repita informacion con el forEach
 
-    template += `
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span class="lead">${item.titulo}</span>
-            <span class="badge bg-primary rounded-pill">${item.cantidad}</span>
-        </li>`;
+//     template += `
+//         <li class="list-group-item d-flex justify-content-between align-items-center">
+//             <span class="lead">${item.titulo}</span>
+//             <span class="badge bg-primary rounded-pill">${item.cantidad}</span>
+//         </li>`;
 
-  }); //trasformar en array para iterar
+//   }); //trasformar en array para iterar
 
-  carrito.innerHTML = template;
-};
+//   carrito.innerHTML = template;
+// };
 
-btnsBotones.forEach((btn) => btn.addEventListener("click", agregarAlCarrito));
+// btnsBotones.forEach((btn) => btn.addEventListener("click", agregarAlCarrito));
 
 // Forma con template  clone
 
@@ -69,3 +69,23 @@ btnsBotones.forEach((btn) => btn.addEventListener("click", agregarAlCarrito));
 // };
 
 // btnsBotones.forEach((btn) => btn.addEventListener("click", agregarAlCarrito));
+
+
+
+// utilizando metodo map
+
+const pintarCarrito = (producto) => {
+  console.log("pintar carrito", producto);
+
+  const itemsCarrito = Object.values(carritoObjeto).map((item) => `
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="lead">${item.titulo}</span>
+          <span class="badge bg-primary rounded-pill">${item.cantidad}</span>
+      </li>`);
+
+  const carritoHTML = itemsCarrito.join(""); // Unir los elementos del array en una cadena
+
+  carrito.innerHTML = carritoHTML;
+};
+
+btnsBotones.forEach((btn) => btn.addEventListener("click", agregarAlCarrito));
